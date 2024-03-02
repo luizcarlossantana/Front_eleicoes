@@ -42,7 +42,7 @@ const Comprovante = (props) => {
   img.src = logoTse;
   const larguraImagem = 30;
   const alturaImagem = 12;
-  const margemX_Imagem = (doc.internal.pageSize.width - larguraImagem - 30) /2;
+  const margemX_Imagem = (doc.internal.pageSize.width - larguraImagem - 10) /2;
 
 
   doc.addImage(logoTse, 'PNG', margemX_Imagem, 20,larguraImagem,alturaImagem);
