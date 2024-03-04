@@ -1,4 +1,13 @@
-.comprovante:hover{
+@media (max-width: 700px) {
 
 
+    .votacao{
+
+        margin-bottom: 50px;
+    }
+
+    .voto_grafico {
+
+        flex-direction: column;
+    }
 }

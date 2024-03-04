@@ -5,7 +5,7 @@ import Grafico from './Grafico'
 const Section_Info_Votar = () => {
   return (
     <>
-     <section className="d-flex mt-4 justify-content-around ">
+     <section className="d-flex mt-4 justify-content-around voto_grafico">
         <Votacao/>
         <Grafico/>
      </section>

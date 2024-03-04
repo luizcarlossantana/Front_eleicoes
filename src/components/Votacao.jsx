@@ -103,7 +103,7 @@ const Votacao = () => {
 
     return (
         <>
-            <div className="d-flex flex-column justify-content-start shadow-lg rounded p-4">
+            <div className="d-flex flex-column justify-content-start shadow-lg rounded p-4 votacao">
                 <div className = "d-flex justify-content-end " >
                <div className='comprovante  '> <Comprovante/></div>
                 </div>
