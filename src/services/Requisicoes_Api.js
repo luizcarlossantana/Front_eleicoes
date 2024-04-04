@@ -16,7 +16,7 @@ export async function buscarMunicipios(uf) {
 
 export async function login(obj) {
   try {
-    const response = await axios.post(`http://api-eleicoes-production.up.railway.app/auth/logar`, obj, {
+    const response = await axios.post(`https://api-eleicoes-production.up.railway.app/auth/logar`, obj, {
       headers: {
         'Content-Type': 'application/json',
       },
