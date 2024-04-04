@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {buscarMunicipios,criarEleitor} from "../services/Requisicoes_Api"
-import NavBar from "../components/NavBar";
+import NavBar from "./NavBar";
 
 
 const Form_cadastro = () => {
@@ -54,16 +54,15 @@ const [estadoSelecionado, setEstadoSelecionado] = useState('');
 useEffect(() => {
   async function receberEstados() {
       try {
-          
-          setEstados(listaEstados); // Atualiza o estado com os cargos obtidos da API
+          setEstados(listaEstados);
       } catch (error) {
           console.error('Erro ao buscar os Estados:', error);
       }
   }
 
-  // Chama a função para receber os cargos quando o componente é montado
   receberEstados();
-}); 
+}, []); 
+
 
 
  
