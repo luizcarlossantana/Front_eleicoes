@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {buscarMunicipios,criarEleitor} from "../services/Requisicoes_Api"
+import NavBar from "../components/NavBar";
 
 
 const Form_cadastro = () => {
@@ -142,7 +143,7 @@ async function createEleitor() {
 
   }
   } catch (error) {
-    console.error('Erro ao buscar os Estados:', error);
+    console.error('Erro ao criar eleitor:', error);
   }
 
   
@@ -152,7 +153,7 @@ async function createEleitor() {
   return (
     <>
   
-
+<NavBar/>
  <section className="  mt-4 d-flex flex-column align-items-center" >
   
   <div className=" col-md-4 p-4 r  rounded-1  shadow-lg">
@@ -176,6 +177,11 @@ async function createEleitor() {
    <div className="">
      <label  className="form-label">Whatsapp</label>
      <input placeholder="(99)99999-9999" type="text" className="form-control " id="validationServer03" onChange={handleWhatsappChange}  />
+   </div>
+
+   <div className="">
+     <label  className="form-label">Senha</label>
+     <input  type="password" className="form-control " id="validationServer03" onChange={handleWhatsappChange}  />
    </div>
 
    <div className="d-flex justify-content-between ">

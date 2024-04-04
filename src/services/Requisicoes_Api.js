@@ -73,3 +73,20 @@ export async function criarEleitor(obj) {
     }
   }
 }
+
+export async function login(obj) {
+  try {
+    const response = await axios.post(`https://api-eleicoes-production.up.railway.app/auth/logar`, obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response;
+  } catch (error) {
+    if (error.response) {
+      return error.response;
+    } else {
+      throw error;
+    }
+  }
+}
