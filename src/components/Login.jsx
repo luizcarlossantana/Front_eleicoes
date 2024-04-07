@@ -7,7 +7,6 @@ const Login = () => {
 
   const [email, setEmail] = useState()
   const [senha, setSenha] = useState()
-  const [token, setToken] = useState();
 
   const obj = {
     login: email,
@@ -32,8 +31,6 @@ const Login = () => {
     try {
       const logarSistema = await login(obj)
       console.log(JSON.stringify(logarSistema,null,2))
-      setToken(logarSistema.data.token)
-      localStorage.setItem('token', token);
       window.location.href = "/home";
       
     } catch (error) {
