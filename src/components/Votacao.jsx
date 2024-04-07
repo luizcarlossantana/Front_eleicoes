@@ -96,6 +96,13 @@ const Votacao = () => {
             }
         } catch (error) {
 
+            if (error.status != 200) {
+
+                window.alert(`
+              Deu Erro!
+              Status: ${error.status}
+              Mensagem: ${JSON.stringify(error, null, 2)}`);
+            }
             console.error('Erro na requisição:', error);
 
         }

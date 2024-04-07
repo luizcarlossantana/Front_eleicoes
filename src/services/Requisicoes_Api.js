@@ -13,7 +13,7 @@ export async function buscarMunicipios(uf) {
   }
 }
 
-var tokenGeral = null;
+var tokenGeral = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlbGVpY2FvLWFwaSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzEyNDcwNDQyfQ.TSqcxNTUcuhg9_C26AkvU9O_BOt6QaW0ILY90Z75EPo"
 
 export async function login(obj) {  
   try {
@@ -60,6 +60,7 @@ export async function buscarListaCandidato() {
 export async function buscarListaCargo() {
   try {
     const token = tokenGeral
+    console.log(token)
     const response = await axios.get('https://api-eleicoes-production.up.railway.app/cargos/listar', {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -68,7 +69,6 @@ export async function buscarListaCargo() {
     return response.data;
   } catch (error) {
     console.error('Erro ao buscar cargos:', error);
-    console.log(localStorage.getItem('token'));
     throw error;
   }
 }
@@ -106,17 +106,16 @@ export async function criarVoto(obj, id) {
 
 
 export async function criarEleitor(obj) {
-  try {
+  
     const token = tokenGeral
+  
     const response = await axios.post(`https://api-eleicoes-production.up.railway.app/eleitores`, obj, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
-    return response.data;
-  } catch (error) {
-    console.error('Erro na requisição:', error);
-    throw error;
-  }
+        return response.data;
+   
+  
 }
