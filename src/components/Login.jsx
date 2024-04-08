@@ -31,7 +31,12 @@ const Login = () => {
     try {
       const logarSistema = await login(obj)
       console.log(JSON.stringify(logarSistema,null,2))
-      window.location.href = "/home";
+      if(logarSistema.status === 200){
+        window.location.href = "/home";
+      }else{
+        window.alert("Ocorreu um erro ao logar");
+      }
+      
       
     } catch (error) {
       console.error("Erro ao logar", error);

@@ -13,7 +13,7 @@ export async function buscarMunicipios(uf) {
   }
 }
 
-var tokenGeral = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlbGVpY2FvLWFwaSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzEyNDcwNDQyfQ.TSqcxNTUcuhg9_C26AkvU9O_BOt6QaW0ILY90Z75EPo"
+var tokenGeral = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlbGVpY2FvLWFwaSIsInN1YiI6InBhdWxvQGdtYWlsLmNvbSIsImV4cCI6MTcxMjYzNDA5MH0.Ch6-PzbqMI6O62ivAA5etJngd5OIpADbdHWPhlA8We8"
 
 export async function login(obj) {  
   try {
