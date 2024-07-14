@@ -5,6 +5,8 @@ const apiUrl = {
   dev:''
 }
 
+// https://front-eleicoes.vercel.app/
+
 axios.defaults.validateStatus = () => {
   return true; // Retorna true para todos os códigos de status
 };
