@@ -1,17 +1,18 @@
 
 import { useEffect, useState } from 'react';
-import { buscarListaCandidato, buscarListaCargo, criarVoto } from '../services/Requisicoes_Api';
+import { buscarListaCandidato, buscarListaCargo, buscarListaEleitores, criarVoto } from '../services/Requisicoes_Api';
 import { Link } from 'react-router-dom';
 import Comprovante from './Comprovante';
 
 
 const Votacao = () => {
     const [cargos, setCargos] = useState([]); // Estado para armazenar os cargos
-    const [candidatos, setCandidatos] = useState([]); // Estado para armazenar os candidatos
+    const [candidatos, setCandidatos] = useState([]);
+    const [eleitores, setEleitores] = useState([]); // Estado para armazenar os candidatos
     const [cargoSelecionado, setCargoSelecionado] = useState(''); // Estado para armazenar o cargo selecionado
     const [idEleitor, setIdEleitor] = useState(''); // Estado para armazenar o ID do eleitor
     const [candidatoSelecionado, setCandidatoSelecionado] = useState(''); // Estado para armazenar o candidato selecionado
-    
+
     useEffect(() => {
         async function receberCargos() {
             try {
@@ -40,23 +41,53 @@ const Votacao = () => {
 
         // Chama a função para receber os candidatos quando o componente é montado ou quando o cargo selecionado muda
         receberCandidatos();
-    }, [cargoSelecionado]); // O segundo argumento [cargoSelecionado] garante que essa função seja chamada sempre que o cargo selecionado mudar
+    }, [cargoSelecionado]); 
+    
+    useEffect(() => {
+        async function receberCargos() {
+            try {
+                const listaCargos = await buscarListaCargo();
+                setCargos(listaCargos); // Atualiza o estado com os cargos obtidos da API
+            } catch (error) {
+                console.error('Erro ao buscar os cargos:', error);
+            }
+        }
 
-    // Ouvinte de evento para atualizar o cargo selecionado
+        // Chama a função para receber os cargos quando o componente é montado
+        receberCargos();
+    }, []); // O segundo argumento [] garante que essa função seja chamada apenas uma vez, quando o componente é montado
+
+    useEffect(() => {
+        async function receberEleitores() {
+            try {
+                const lista = await buscarListaEleitores();
+                
+                setEleitores(lista); 
+            } catch (error) {
+                console.error('Erro ao buscar os candidatos:', error);
+            }
+        }
+
+        // Chama a função para receber os candidatos quando o componente é montado ou quando o cargo selecionado muda
+        receberEleitores();
+    }, []);
+
     const handleCargoChange = (event) => {
         const cargoSelecionado = event.target.value;
         setCargoSelecionado(cargoSelecionado);
     };
 
 
-    const IdChange = (event) => {
-        const idEleitor = event.target.value;
-        setIdEleitor(idEleitor);
-    };
+
 
     const CandidatoChange = (event) => {
         const candidatoSelecionado = event.target.value;
         setCandidatoSelecionado(candidatoSelecionado);
+    };
+
+    const EleitorChange = (event) => {
+        const eleitorSelecionado = event.target.value;
+        setIdEleitor(eleitorSelecionado);
     };
 
     async function creatVoto() {
@@ -88,7 +119,8 @@ const Votacao = () => {
                 window.alert(`
               Deu Erro!
               Status: ${response.status}
-              Mensagem: ${JSON.stringify(response.data, null, 2)}`);
+              Mensagem: ${JSON.stringify(response, null, 2)}`);
+                console.log(response)
             } else {
 
                 window.alert('Deu Certo');
@@ -103,7 +135,7 @@ const Votacao = () => {
               Status: ${error.status}
               Mensagem: ${JSON.stringify(error, null, 2)}`);
             }
-            console.error('Erro na requisição:', error);
+            console.log(error);
 
         }
     }
@@ -111,8 +143,8 @@ const Votacao = () => {
     return (
         <>
             <div className="d-flex flex-column justify-content-start shadow-lg rounded p-4 votacao">
-                <div className = "d-flex justify-content-end " >
-               <div className='comprovante  '> <Comprovante/></div>
+                <div className="d-flex justify-content-end " >
+                    <div className='comprovante  '> <Comprovante /></div>
                 </div>
                 <h1 className="text-start mb-4 pb-2 border-bottom border-light">Votação</h1>
                 <div className="d-flex justify-content-around">
@@ -136,7 +168,12 @@ const Votacao = () => {
                     </div>
                     <div className="d-flex flex-column align-items-start">
                         <h1 className="fs-4">Eleitor</h1>
-                        <input id="ideleitor" type="text" className="form-control" placeholder="id" onChange={IdChange} />
+                        <select id="candidato" className="form-select form-select-md" aria-label="" onChange={EleitorChange}>
+                            <option value="">Escolha um candidato</option>
+                            {eleitores.map(candidato => (
+                                <option key={candidato.id} value={candidato.id}>{candidato.nome}</option>
+                            ))}
+                        </select>
                     </div>
                 </div>
                 <button id="button" className="btn btn-primary mb-4 mt-4 d-inline-block align-self-start" onClick={creatVoto}>Votar</button>
