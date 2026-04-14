@@ -1,23 +1,12 @@
-# Use a imagem Node.js como base
-FROM node:20
+FROM nginx:1.15.0
 
-# Defina o diretório de trabalho dentro do contêiner
-WORKDIR /app
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copie o arquivo package.json e o arquivo package-lock.json para o diretório de trabalho
-COPY package*.json ./
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Instale as dependências do projeto
-RUN npm install
+COPY nginx.conf /etc/nginx/conf.d
 
-# Copie todos os arquivos do diretório atual para o diretório de trabalho dentro do contêiner
-COPY . .
-
-# Construa o aplicativo React
-RUN npm run build
-
-# Exponha a porta 3000 para fora do contêiner (ou a porta que o Vite usa)
-EXPOSE 5173
-
-# Defina o comando padrão a ser executado quando o contêiner for iniciado
-CMD ["npm", "run", "dev"]
+# Copie os arquivos do front-end para o diretório padrão do Nginx
+COPY dist/nginx-teste/ /usr/share/nginx/html/
+# Exponha a porta 80 (porta padrão do Nginx)
+EXPOSE 80
