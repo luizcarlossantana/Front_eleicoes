@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiUrl = {
-  localhost:'https://eleicoes-api-9-1.onrender.com/',
+  localhost:'http://3.222.53.205:8080/',
   dev:''
 }
 
