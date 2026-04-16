@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./components/Login";
 import Form_cadastro from "./components/Form_cadastro";
